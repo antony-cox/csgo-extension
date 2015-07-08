@@ -8,6 +8,5 @@ His extension had a lot more features and a way nicer layout so we combined forc
 The last updates to the old extension were made early june 2013 and the project was abandoned.
 On the 8th of july 2015 I started working on the extension again for fun.
 
-Layout by eNzy (https://www.reddit.com/user/eNzyy)
-
-Coding by Antony Cox
+Layout by eNzy (https://www.reddit.com/user/eNzyy).
+Coding by Antony Cox.
