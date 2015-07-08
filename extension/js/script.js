@@ -197,8 +197,8 @@ function getStreams(limit) {
 				link = itemArray[i].channel.url;
 			}
 			html += "<tr><td><a href="+link+" target='_blank'><img src='"+logo+"' width='70px' height='70px'/></a></td>";
-			html += "<td><p><a href="+link+" class='streamsLink' target='_blank'>"+itemArray[i].channel.display_name+"</a><div class='viewerCount'>"+itemArray[i].viewers+" Viewers</div>";
-			html += "<span>"+itemArray[i].channel.status+"</span>";
+			html += "<td><div class='streamTitle'><span class='streamName'><a href="+link+" class='streamsLink' target='_blank'>"+itemArray[i].channel.display_name+"</a></span><span class='viewerCount'>"+itemArray[i].viewers+" Viewers</span></div>";
+			html += "<div class='streamDesc'>"+itemArray[i].channel.status+"</div>";
 			html += "</td></tr>";
 		}
 		if(limit=10) {

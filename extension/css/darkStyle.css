@@ -15,20 +15,7 @@ h3 {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(13,13,13,0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(13,13,13,0.4); 
+    width: 0 !important;
 }
 
 #loading
@@ -40,7 +27,6 @@ h3 {
 .contentArea
 {
 	overflow: auto;
-	overflow-x: hidden;
 	height: 354px;
 	margin-top:-6px;
 }
@@ -147,7 +133,7 @@ li
 {
 	padding:0px;
 	border-spacing: 0px;
-	width:100%;
+	width: 100%;
 }
 
 #tblReddit td, #tblStreams td
@@ -177,15 +163,6 @@ li
 	margin:0;
 }
 
-#tblStreams span
-{
-	display:block;
-	color:#c7c9cb;
-	padding:0px 2px;
-	margin:0;
-	font-size:11px;
-}
-
 #tblStreams p
 {
 	display:inline;
@@ -203,13 +180,25 @@ li
 	color: #c7c9cb;
 }
 
+.streamName
+{
+	float: left;
+	font-size: 14px;
+}
+
 .viewerCount
 {
-	padding:0;
+	padding: 0px 20px 0px 0px;
 	margin:0;
 	display:inline !important;
-	float:right;
-	margin-right:30px;
+	float: right;
+}
+
+.streamDesc
+{
+	float: left;
+	width: 220px !important;
+	padding: 2px 2px 2px 2px;
 }
 
 #tblEvents td
@@ -230,7 +219,6 @@ li
 
 #moreStreams
 {
-	
 	background-color:#1c222b;
 	color:#97b7d1;
 	padding: 20px 10px;
