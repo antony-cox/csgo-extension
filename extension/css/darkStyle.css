@@ -252,36 +252,31 @@ li
 .iconHome
 {
 	background-image: url("../img/icons/home.png");
-	width:16px;
-	height:16px;
+	background-repeat: no-repeat;
 }
 
 .iconStreams
 {
 	background-image: url("../img/icons/streams.png");
-	width:16px;
-	height:16px;
+	background-repeat: no-repeat;
 }
 
 .iconReddit
 {
 	background-image: url("../img/icons/reddit.png");
-	width:16px;
-	height:16px;
+	background-repeat: no-repeat;
 }
 
 .iconEvents
 {
 	background-image: url("../img/icons/events.png");
-	width:16px;
-	height:16px;
+	background-repeat: no-repeat;
 }
 
 .iconNews
 {
 	background-image: url("../img/icons/news.png");
-	width:16px;
-	height:16px;
+	background-repeat: no-repeat;
 }
 
 .iconRefresh
@@ -293,4 +288,21 @@ li
 	left:13px;
 	bottom:0;
 	margin-bottom:13px;
+}
+
+h2
+{
+	margin: 0;
+	padding: 2px 2px 2px 2px;
+	color: #97b7d1;
+}
+
+table
+{
+	padding-left: 10px;
+}
+
+td
+{
+	padding: 5px 2px 2px 5px;
 }

@@ -1,15 +1,14 @@
 var loading = "<img src='../img/loading.gif' id='loading' />";
 var eventLinks = [];
-load_style();
 
 $(document).ready(function() {
 	var defaultTab = localStorage["defaultTab"];
 	var homeLink = document.getElementById('homeLink');
 	homeLink.onclick = getHome;
-	var newsLink = document.getElementById('newsLink');
-	newsLink.onclick = getNews;
-	var redditLink = document.getElementById('redditLink');
-	redditLink.onclick = getReddit(10);
+	//var newsLink = document.getElementById('newsLink');
+	//newsLink.onclick = getNews;
+	//var redditLink = document.getElementById('redditLink');
+	//redditLink.onclick = getReddit(10);
 	var streamsLink = document.getElementById('streamsLink');
 	streamsLink.onclick = getStreams(10);
 	var eventsLink = document.getElementById('eventsLink');
@@ -17,34 +16,8 @@ $(document).ready(function() {
 	if(!(defaultTab == "" || defaultTab == null)) {
 		load_defaultTab(defaultTab);
 	}
-	$("#accordion").accordion({ collapsible: true, heightStyle: "content" });
+	//$("#accordion").accordion({ collapsible: true, heightStyle: "content" });
 });
-
-function saveTab() {
-	var content = document.getElementById('content').children;
-	for(var i = 0;i<content.length;i++) {
-		if(content[i].style.display == "block") {
-			localStorage["lastTab"] = content[i].id;
-		}	
-	}
-}
-
-function load_style() {
-	var links = document.getElementsByTagName("link");
-	var theme = localStorage["theme"]
-	for (var i = 0;i<links.length;i++) {
-		if(links[i].rel.indexOf("stylesheet") != 1 && links[i].title != "grid") {
-			links[i].disabled = true
-			if((theme == "") || (theme == null) && links[i].title == "dark") {
-				links[i].disabled = false;
-			} else if(theme == "dark" && links[i].title == "dark") {
-				links[i].disabled = false;
-			} else if(theme == "light" && links[i].title == "light") {
-				links[i].disabled = false;
-			}
-		}
-	}
-}
 
 function load_defaultTab(defaultTab) {
 	var divs = document.getElementById("content").children;
@@ -263,7 +236,8 @@ function getEvents() {
 				var teams = itemArray[i].title.split(' vs ');
 				timeDiff = getTimeDiff(itemArray[i].pubDate, "events");
 				html += "<tr id="+i+"><td><a href="+itemArray[i].link+" target='blank'>"+itemArray[i].description+"</a><span>"+getTimeDiff(itemArray[i].pubDate, "events")+"</span>";
-				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs <img id='"+i+"country2' src=''/> "+teams[1]+"</td></div></tr>";
+				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs <img id='"+i+"country2' src=''/> "+teams[1]+"</div>";
+				html += "<span id="+i+"><a href='#'>Remind me!</a></span></td></tr>";
 				getTeams(itemArray[i].link, i);
 				eventLinks[i] = itemArray[i].link;
 			}

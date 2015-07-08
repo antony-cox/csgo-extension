@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" href="css/grid.css" /> <!-- Including grid -->
-		<link rel="stylesheet" href="css/darkStyle.css" /> <!-- Our css file -->		
-		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script> <!-- Including jQuery -->
-	</head>
+<head>
+	<link rel="stylesheet" href="css/grid.css" /> <!-- Including grid -->
+	<link rel="stylesheet" href="css/darkStyle.css" /> <!-- Our css file -->
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script> <!-- Including jQuery -->
+</head>
 
-	<body>
-		<p>Default tab:
-		<select id="defaultTab">
-			<option value="news">News</option>
-			<option value="reddit">Reddit</option>
-			<option value="streams">Streams</option>
+<body style="padding: 0px 5px 5px 5px;">
+<h2>Options</h2>
+<table>
+	<tr>
+		<td>Default tab:</td>
+	</tr>
+	<tr>
+		<td>
+			<select id="defaultTab">
+				<!--<option value="news">News</option>
+				<option value="reddit">Reddit</option>-->
+				<option value="streams">Streams</option>
 			<option value="events">Events</option>
-		</select></p>
-		
-		<p>Theme:
-		<form action="">
-			<input type="radio" name="theme" value="dark">Dark Theme<br>
-			<input type="radio" name="theme" value="light">Light Theme
-		</form></p>
-		
-		<p>Remember last tab open:
-		<form action="">
-			<input id="rememberLastTab" type="checkbox" name="remembertab" value="remember">
-		</form></p>
-		
-		<p>How to open Twitch.tv stream links:
-		<form action="">
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>How to open Twitch.tv stream links:</td>
+	</tr>
+
+	<tr>
+		<td><form action="">
 			<input type="radio" name="twitch" value="channel">Open channel page<br>
 			<input type="radio" name="twitch" value="popout">Open popout
-		</form></p>
+		</form></td>
+	</tr>
 
-		<br>
-		<div id="status"></div>
-		<button id="save">Save</button>
-	</body>
-	<script type="text/javascript" src="js/options.js"></script><!--  Our script file -->
+	<tr>
+		<td>
+			<button id="save">Save</button>
+		</td>
+		<td>
+			<div id="status"></div>
+		</td>
+	</tr>
+</table>
+</body>
+<script type="text/javascript" src="js/options.js"></script><!--  Our script file -->
 </html>
