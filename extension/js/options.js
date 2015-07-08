@@ -19,7 +19,7 @@ function save_options() {
   status.innerHTML = "Options Saved.";
   setTimeout(function() {
     status.innerHTML = "";
-	window.location = "popup.html";
+	window.location = "../popup.html";
   }, 750);
 }
 
