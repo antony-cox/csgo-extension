@@ -282,14 +282,13 @@ function getTeams(link, i) {
 		var flag1 = document.getElementById(i+"country");
 		var flag2 = document.getElementById(i+"country2");
 		$html = $(data);
-		var $table = $html.find(".hotmatch_teams")
+		var $table = $html.find(".centerFade")
 		try {
-			var team1 = $table[0].children[0].children[0].src.split('/');
-			var team2 = $table[0].children[1].children[0].src.split('/');
-			var country1 = "../img/flags/"+team1[team1.length-1];
-			var country2 = "../img/flags/"+team2[team2.length-1];
-			flag1.src = country1;
-			flag2.src = country2;
+			var $div = $table[0].children[12].children[0];
+			var team1 = $div.children[0].children[0].src.split('/');
+			var team2 = $div.children[2].children[1].src.split('/');
+			flag1.src = "../img/flags/"+team1[team1.length-1];
+			flag2.src  = "../img/flags/"+team2[team2.length-1];
 		} catch (err) {
 		}
 	});
