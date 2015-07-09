@@ -27,8 +27,10 @@ h3 {
 .contentArea
 {
 	overflow: auto;
-	height: 354px;
+	height: 366px;
+	margin: 0;
 	margin-top:-6px;
+	padding: 0;
 }
 
 #wrapper
@@ -78,7 +80,7 @@ li
 
 .header
 {
-	height: 53px;
+	height: 40px;
 	background: url("../img/bgHeader.png");
 	background-repeat:repeat-x;
 	color: #97b7d1;
@@ -133,13 +135,7 @@ li
 {
 	padding:0px;
 	border-spacing: 0px;
-	width: 100%;
-}
-
-#tblReddit td, #tblStreams td
-{
-	padding:5px;
-	height:50px;
+	width: 100% !important;
 }
 
 #tblReddit tr:hover, #tblReddit tr:nth-child(even):hover, 
@@ -152,7 +148,7 @@ li
 
 #tblReddit tr:nth-child(even), #tblStreams  tr:nth-child(even), #tblEvents  tr:nth-child(even)
 {
-	background-color:#181d22; 
+	background-color:#181d22;
 }
 
 #tblReddit span
@@ -161,12 +157,6 @@ li
 	color:#c7c9cb;
 	padding:0px 2px;
 	margin:0;
-}
-
-#tblStreams p
-{
-	display:inline;
-	font-size:14px;
 }
 
 .redditLink

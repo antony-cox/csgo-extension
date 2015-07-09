@@ -5,7 +5,6 @@ var notifications = [];
 
 $(document).ready(function() {
 	if(localStorage.getItem("notifications") != null) notifications = JSON.parse(localStorage["notifications"]);
-	console.log(notifications);
 	var defaultTab = localStorage["defaultTab"];
 	var homeLink = document.getElementById('homeLink');
 	homeLink.onclick = getHome;
