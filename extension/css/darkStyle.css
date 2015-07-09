@@ -277,6 +277,17 @@ li
 	margin-bottom:13px;
 }
 
+.iconOptions
+{
+	background-image: url("../img/icons/settings.png");
+	width:16px;
+	height:16px;
+	position:absolute;
+	left:13px;
+	bottom:0;
+	margin-bottom:13px;
+}
+
 .q
 {
 	color: white;
