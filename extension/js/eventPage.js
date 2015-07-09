@@ -7,9 +7,9 @@ chrome.runtime.onMessage.addListener(
             iconUrl: request.iconUrl
         };
 
-        setTimeout(function() { createNotification(options); }, request.timeout);
+        setTimeout(function() { createNotification(request.id, options); }, request.timeout);
     });
 
-function createNotification(options) {
-    chrome.notifications.create("", options);
+function createNotification(id, options) {
+    chrome.notifications.create(""+id, options);
 }

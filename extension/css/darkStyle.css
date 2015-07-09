@@ -213,8 +213,7 @@ li
 
 .teams
 {
-	font-size: 18px;
-	letter-spacing:1px;
+	font-size: 16px;
 }
 
 #moreStreams
@@ -276,6 +275,11 @@ li
 	left:13px;
 	bottom:0;
 	margin-bottom:13px;
+}
+
+.q
+{
+	color: white;
 }
 
 h2

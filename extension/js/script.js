@@ -20,7 +20,8 @@ $(document).ready(function() {
 	//$("#accordion").accordion({ collapsible: true, heightStyle: "content" });
 
 	chrome.notifications.onClicked.addListener(function(notificationId) {
-		//chrome.tabs.create({ url: "http://www.google.com"})
+		console.log(notificationId);
+		chrome.tabs.create({ url: eventLinks[notificationId]});
 	});
 });
 
@@ -87,11 +88,18 @@ function reminderHandler() {
 		var dateNow = new Date();
 		var dateBegin = new Date(events[i].pubDate);
 		var ms = dateBegin.getTime() - dateNow.getTime();
-		ms -= 300000;
+
+		var reminderTime = localStorage["reminderTime"];
+		if(reminderTime != null && reminderTime != "live")
+		{
+			ms -= (reminderTime * 60 * 1000);
+		}
+
 		var options = {
+			id: i,
 			type: "basic",
 			title: events[i].description + " : " + events[i].title,
-			message: events[i].title + " is starting in 5 minutes.",
+			message: events[i].title + " is starting soon. Click here to go to the HLTV.org page.",
 			iconUrl: "img/redditDefault.png",
 			link: events[i].link,
 			timeout: 5000
@@ -268,7 +276,7 @@ function getEvents() {
 				var teams = itemArray[i].title.split(' vs ');
 				timeDiff = getTimeDiff(itemArray[i].pubDate, "events");
 				html += "<tr id="+i+"><td><a href="+itemArray[i].link+" target='blank'>"+itemArray[i].description+"</a><span>"+getTimeDiff(itemArray[i].pubDate, "events")+"</span>";
-				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs <img id='"+i+"country2' src=''/> "+teams[1]+"</div>";
+				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs "+teams[1]+" <img id='"+i+"country2' src=''/></div>";
 				html += "<span><a href='#' id='reminder"+i+"' match='"+i+"'>Remind me!</a></span>";
 				getTeams(itemArray[i].link, i);
 				eventLinks[i] = itemArray[i].link;
