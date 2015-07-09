@@ -1,5 +1,12 @@
+var notifications = [];
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+        if(request.getNotifications)
+        {
+            sendResponse({notifications: notifications});
+        }
+
         var options = {
             type: request.type,
             title: request.title,
@@ -12,4 +19,5 @@ chrome.runtime.onMessage.addListener(
 
 function createNotification(id, options) {
     chrome.notifications.create(""+id, options);
+    notifications[id] = options.title;
 }

@@ -1,8 +1,11 @@
 var loading = "<img src='../img/loading.gif' id='loading' />";
 var eventLinks = [];
 var events = [];
+var notifications = [];
 
 $(document).ready(function() {
+	if(localStorage.getItem("notifications") != null) notifications = JSON.parse(localStorage["notifications"]);
+	console.log(notifications);
 	var defaultTab = localStorage["defaultTab"];
 	var homeLink = document.getElementById('homeLink');
 	homeLink.onclick = getHome;
@@ -20,8 +23,8 @@ $(document).ready(function() {
 	//$("#accordion").accordion({ collapsible: true, heightStyle: "content" });
 
 	chrome.notifications.onClicked.addListener(function(notificationId) {
-		console.log(notificationId);
 		chrome.tabs.create({ url: eventLinks[notificationId]});
+		chrome.notifications.clear(notificationId);
 	});
 });
 
@@ -102,7 +105,7 @@ function reminderHandler() {
 			message: events[i].title + " is starting soon. Click here to go to the HLTV.org page.",
 			iconUrl: "img/redditDefault.png",
 			link: events[i].link,
-			timeout: 5000
+			timeout: ms
 		}
 
 		chrome.runtime.sendMessage(options, function(response) {
@@ -111,6 +114,8 @@ function reminderHandler() {
 
 		var parent = $(this).parent();
 		parent[0].innerHTML = "Reminder set.";
+		notifications[i] = options.title;
+		localStorage["notifications"] = JSON.stringify(notifications);
 	})
 }
 
@@ -275,9 +280,17 @@ function getEvents() {
 			for(var i = 0;i<itemArray.length;i++) {
 				var teams = itemArray[i].title.split(' vs ');
 				timeDiff = getTimeDiff(itemArray[i].pubDate, "events");
-				html += "<tr id="+i+"><td><a href="+itemArray[i].link+" target='blank'>"+itemArray[i].description+"</a><span>"+getTimeDiff(itemArray[i].pubDate, "events")+"</span>";
-				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs "+teams[1]+" <img id='"+i+"country2' src=''/></div>";
-				html += "<span><a href='#' id='reminder"+i+"' match='"+i+"'>Remind me!</a></span>";
+				html += "<tr id=" + i + "><td><a href=" + itemArray[i].link + " target='blank'>" + itemArray[i].description + "</a><span>" + getTimeDiff(itemArray[i].pubDate, "events") + "</span>";
+				html += "<div class='teams'><img id='" + i + "country' src=''/> " + teams[0] + " vs " + teams[1] + " <img id='" + i + "country2' src=''/></div>";
+				if (notifications != null) {
+					if (notifications[i] == (itemArray[i].description + " : " + itemArray[i].title)) {
+						html += "<span>Reminder set.</span>";
+					} else {
+						html += "<span><a href='#' id='reminder" + i + "' match='" + i + "'>Remind me!</a></span>";
+					}
+				} else {
+					html += "<span><a href='#' id='reminder" + i + "' match='" + i + "'>Remind me!</a></span>";
+				}
 				getTeams(itemArray[i].link, i);
 				eventLinks[i] = itemArray[i].link;
 			}
