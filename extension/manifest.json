@@ -9,12 +9,16 @@
 	{
 		"128" : "icon.png"
 	},
-	"permissions": [ "<all_urls>", "tabs" ],
+	"permissions": [ "<all_urls>", "tabs", "notifications" ],
 	"options_page": "options.html",	
 	"browser_action" :
 	{
 		"default_icon" : "browseraction.png",
 		"default_title" : "CS:GO Helper",
 		"default_popup" : "popup.html"
+	},
+  	"background": {
+	  	"scripts": ["js/eventPage.js"],
+		"persistent": false
 	}
 }

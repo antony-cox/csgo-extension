@@ -1,5 +1,6 @@
 var loading = "<img src='../img/loading.gif' id='loading' />";
 var eventLinks = [];
+var events = [];
 
 $(document).ready(function() {
 	var defaultTab = localStorage["defaultTab"];
@@ -17,6 +18,10 @@ $(document).ready(function() {
 		load_defaultTab(defaultTab);
 	}
 	//$("#accordion").accordion({ collapsible: true, heightStyle: "content" });
+
+	chrome.notifications.onClicked.addListener(function(notificationId) {
+		//chrome.tabs.create({ url: "http://www.google.com"})
+	});
 });
 
 function load_defaultTab(defaultTab) {
@@ -75,8 +80,34 @@ function clickTR() {
 	});
 }
 
+function reminderHandler() {
+	$("a[id^='reminder']").click(function()
+	{
+		var i = $(this).attr('match');
+		var dateNow = new Date();
+		var dateBegin = new Date(events[i].pubDate);
+		var ms = dateBegin.getTime() - dateNow.getTime();
+		ms -= 300000;
+		var options = {
+			type: "basic",
+			title: events[i].description + " : " + events[i].title,
+			message: events[i].title + " is starting in 5 minutes.",
+			iconUrl: "img/redditDefault.png",
+			link: events[i].link,
+			timeout: 5000
+		}
+
+		chrome.runtime.sendMessage(options, function(response) {
+			console.log(response.farewell);
+		});
+
+		var parent = $(this).parent();
+		parent[0].innerHTML = "Reminder set.";
+	})
+}
+
 function getHome() {
-	
+
 }
 
 function getNews() {
@@ -228,6 +259,7 @@ function getEvents() {
 			itemArray.push(item);
 		});
 		
+		events = itemArray;
 		var html = "<tbody>";
 		if (itemArray.length>0) {
 			var timeDiff;
@@ -237,16 +269,19 @@ function getEvents() {
 				timeDiff = getTimeDiff(itemArray[i].pubDate, "events");
 				html += "<tr id="+i+"><td><a href="+itemArray[i].link+" target='blank'>"+itemArray[i].description+"</a><span>"+getTimeDiff(itemArray[i].pubDate, "events")+"</span>";
 				html += "<div class='teams'><img id='"+i+"country' src=''/> "+teams[0]+" vs <img id='"+i+"country2' src=''/> "+teams[1]+"</div>";
-				html += "<span id="+i+"><a href='#'>Remind me!</a></span></td></tr>";
+				html += "<span><a href='#' id='reminder"+i+"' match='"+i+"'>Remind me!</a></span>";
 				getTeams(itemArray[i].link, i);
 				eventLinks[i] = itemArray[i].link;
 			}
 		} else {
 			html += "<td><tr>No matches scheduled at the moment. Check back here later!</tr></td>";
 		}
+
+		html += "<tr><td colspan='2'><a id='moreStreams' target='_blank' href='http://www.hltv.org/matches/archive/'>Past Matches</a></td></tr>";
 		html += "</tbody>";
 		tblEvents.innerHTML = html;
 		clickTR();
+		reminderHandler();
 	});
 }
 
@@ -272,11 +307,7 @@ function getTimeDiff(strDate, type) {
 	var str = "";
 	var dateNow = new Date();
 	var dateBegin = new Date(strDate);
-	if(type=="news") {
-		var timeDiff = dateNow.getTime() - dateBegin.getTime();
-	} else {
-		var timeDiff = dateBegin.getTime() - dateNow.getTime();
-	}
+	var timeDiff = dateBegin.getTime() - dateNow.getTime();
 	var seconds = Math.floor(timeDiff / 1000);
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
@@ -285,7 +316,10 @@ function getTimeDiff(strDate, type) {
 	minutes %= 60;
 	seconds %= 60;
 	
-	if(type=="news") {
+	if(type=="notification")
+	{
+
+	} else if(type=="news") {
 		if(days<1) {
 			if(hours<1) {
 				str = minutes + "m ago";
@@ -295,7 +329,7 @@ function getTimeDiff(strDate, type) {
 		} else {
 			str = days + "d ago";
 		}
-	} else {
+	} else  {
 		if(timeDiff < 1) {
 			str = "Live!"
 		} else {
