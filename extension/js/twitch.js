@@ -1,5 +1,5 @@
 /**
- *THIS SCRIPT HANDLES THE STREAM BROWSER PART OF THE EXTENSION
+ * THIS SCRIPT HANDLES THE STREAM BROWSER PART OF THE EXTENSION
  **/
 var loading = "<img src='../img/loading.gif' id='loading' />";
 
@@ -42,7 +42,7 @@ function getStreams()
         for(var  i = 0;i<itemArray.length;i++)
         {
             //PREPARE STREAMER LOGO
-            var logo = "";
+            var logo;
             if(itemArray[i].channel.logo == null) {
                 logo = "../img/twitchDefault.png";
             } else {
@@ -50,7 +50,7 @@ function getStreams()
             }
 
             //PREPARE LINK FROM USER OPTIONS
-            var link = "";
+            var link;
             if(localStorage["twitch"] == "popout") {
                 link = itemArray[i].channel.url+"/popout";
             } else {
@@ -65,10 +65,9 @@ function getStreams()
                 } else {
                     description = itemArray[i].channel.status;
                 }
-            } else {
-                description = "";
             }
 
+            //CREATE ELEMENTS
             //CREATE FIRST TD
             //CONTAINING IMAGE & LINK
             var img = document.createElement('img');
