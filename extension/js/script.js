@@ -1,3 +1,6 @@
+/**
+ * MAIN SCRIPT OF THE EXTENSION
+ **/
 var loading = "<img src='../img/loading.gif' id='loading' />";
 var eventLinks = [];
 var events = [];
@@ -12,8 +15,8 @@ $(document).ready(function() {
 	//newsLink.onclick = getNews;
 	//var redditLink = document.getElementById('redditLink');
 	//redditLink.onclick = getReddit(10);
-	var streamsLink = document.getElementById('streamsLink');
-	streamsLink.onclick = getStreams(10);
+	//var streamsLink = document.getElementById('streamsLink');
+	//streamsLink.onclick = getStreams(10);
 	var eventsLink = document.getElementById('eventsLink');
 	eventsLink.onclick = getEvents;
 	if(!(defaultTab == "" || defaultTab == null)) {
@@ -74,13 +77,13 @@ function setActiveIcon(title) {
 }
 
 function clickTR() {
-	$("tr").click(function() {
+	/*$("tr").click(function() {
 		var nodeName = event.target.nodeName;
 		if(!(nodeName == "A" || nodeName == "IMG")) {
 			var newURL = $(this).find("a").attr("href");
 			chrome.tabs.create({ url: newURL });
 		}
-	});
+	});*/
 }
 
 function reminderHandler() {
@@ -194,61 +197,6 @@ function getReddit(limit) {
 		html += "<tr><td colspan='2'><a id='moreStreams' target='_blank' href='http://www.reddit.com/r/GlobalOffensive/'>View more</a></td></tr>";
 		html += "</tbody>";
 		tblReddit.innerHTML = html;
-		clickTR();
-	});
-}
-
-function getStreams(limit) {
-	var tblStreams = document.getElementById('tblStreams');
-	tblStreams.innerHTML = loading;
-	$jqhxr = $.getJSON('https://api.twitch.tv/kraken/streams?game=Counter-Strike:+Global+Offensive&limit='+limit);
-	$jqhxr.done(function(data) {
-		var $json = $(data);
-		var itemArray = [];
-		for (var i = 0; i<$json[0].streams.length;i++) {
-			item = {
-				preview: $json[0].streams[i].preview.medium,
-				viewers: $json[0].streams[i].viewers,
-				channel: $json[0].streams[i].channel,
-			}
-			itemArray.push(item);
-		}
-		
-		
-		var html = "<tbody>";
-		var status = "";
-		var logo = "";
-		var link = "";
-		for (var i = 0;i<itemArray.length;i++) {
-			if(itemArray[i].channel.logo == null) {
-				logo = "../img/twitchDefault.png";
-			} else {
-				logo = itemArray[i].channel.logo;
-			}
-			if(itemArray[i].channel.status!=null) {
-				if (itemArray[i].channel.status.length>60) {
-					status = itemArray[i].channel.status.substring(0,56) + " ...";
-				} else {
-					status = itemArray[i].channel.status;
-				}
-			} else {
-				status = "";
-			}
-			if(localStorage["twitch"] == "popout") {
-				link = itemArray[i].channel.url+"/popout";
-			} else {
-				link = itemArray[i].channel.url;
-			}
-			html += "<tr><td><a href="+link+" target='_blank'><img src='"+logo+"' width='70px' height='70px'/></a></td>";
-			html += "<td><div class='streamTitle'><span class='streamName'><a href="+link+" class='streamsLink' target='_blank'>"+itemArray[i].channel.display_name+"</a></span><span class='viewerCount'>"+itemArray[i].viewers+" Viewers</span></div>";
-			html += "<div class='streamDesc'>"+itemArray[i].channel.status+"</div>";
-			html += "</td></tr>";
-		}
-		if(limit=10) {
-			html += "<tr><td colspan='2'><a id='moreStreams' target='_blank' href='http://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive'>View all</a></td></tr>";
-		}		
-		html += "</tbody>";	
-		tblStreams.innerHTML = html;
 		clickTR();
 	});
 }
