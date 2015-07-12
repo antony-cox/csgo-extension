@@ -8,10 +8,11 @@
 		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script> <!-- Including jQuery -->
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script> <!--  Including tabs -->
 		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script> <!--  Including accordion -->
-		<script type="text/javascript" src="js/script.js"></script><!--  Main script file -->
+		<script type="text/javascript" src="js/main.js"></script><!--  Main script file -->
 		<script type="text/javascript" src="js/twitch.js"></script><!-- Script file for Twitch streams -->
 		<script type="text/javascript" src="js/reddit.js"></script><!-- Script file for Reddit posts-->
-		<script type="text/javascript" src="js/news.js"></script><!-- Script file for news-->
+		<script type="text/javascript" src="js/news.js"></script><!-- Script file for News-->
+		<script type="text/javascript" src="js/options.js"></script><!-- Script file for Options -->
 	</head>
 
 	<body>
@@ -23,10 +24,9 @@
 					<a href="#reddit" id="redditLink" title="Reddit"><li class="iconReddit"></li></a>
 					<a href="#news" id="newsLink" title="News"><li class="iconNews"></li></a>
 					<a href="#home" id="homeLink" title="Home"><li class="iconHome"></li></a>
+					<a href="#options" id="optionsLink"><li class="iconOptions"></li></a>
 					<!--<a href="#resources" id="resourcesLink" title="Resources"><li class="iconEvents"></li></a>-->
 				</ul><!-- end .idTabs -->
-				
-				<a href="options.html" id="refresh"><div class="iconOptions"></div></a>
 			</div><!-- end #navigation -->
 			
 			<div id="content" class="grid_14">
@@ -35,17 +35,6 @@
 					<div class="contentArea">
 						<p style="padding:5px 10px;">
 							CS:GO Extension v0.1.
-						</p>
-						<p style="padding:5px 10px;">
-							Contactinfo:
-							<ul style="padding: 0px 0px 0px 20px;">
-								<li><a href="https://www.reddit.com/user/letoiny" target="_blank">Reddit</a></li>
-								<li><a href="http://steamcommunity.com/id/toiny" target="_blank">Steam</a></li>
-								<li>antony.cox@gmail.com</li>
-							</ul>
-						</p>
-						<p style="padding:5px 10px;">
-							Layout by eNzy. <br/>
 						</p>
 					</div><!-- end .contentArea -->
 				</div><!-- end #home -->
@@ -81,6 +70,62 @@
 						</table><!-- end #tblNews -->
 					</div><!-- end .contentArea -->
 				</div><!-- end #news -->
+
+				<div id="options">
+					<h2>Options</h2>
+					<table>
+						<tr>
+							<td class="q">Default tab:</td>
+						</tr>
+						<tr>
+							<td>
+								<select id="defaultTab">
+									<option value="events">Events</option>
+									<option value="streams">Streams</option>
+									<option value="reddit">Reddit</option>
+									<option value="news">News</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="q">How to open Twitch.tv stream links:</td>
+						</tr>
+
+						<tr>
+							<td><form action="">
+								<input type="radio" name="twitch" value="channel">Open channel page<br>
+								<input type="radio" name="twitch" value="popout">Open popout
+							</form></td>
+						</tr>
+
+						<tr>
+							<td class="q">When to show reminder:</td>
+						</tr>
+
+						<tr>
+							<td>
+								<select id="reminderTime">
+									<option value="live">Live</option>
+									<option value="1">1 minutes</option>
+									<option value="2">2 minutes</option>
+									<option value="3">3 minutes</option>
+									<option value="4">4 minutes</option>
+									<option value="5">5 minutes</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<button id="save">Save</button>
+							</td>
+							<td>
+								<div id="status"></div>
+							</td>
+						</tr>
+					</table>
+				</div>
 				
 				<!--
 				<div id="resources">

@@ -13,6 +13,8 @@ $(document).ready(function() {
 	homeLink.onclick = getHome;
 	var eventsLink = document.getElementById('eventsLink');
 	eventsLink.onclick = getEvents;
+	var optionsLink = document.getElementById('optionsLink')
+	optionsLink.onclick = options();
 	if(!(defaultTab == "" || defaultTab == null)) {
 		load_defaultTab(defaultTab);
 	}
@@ -116,6 +118,11 @@ function reminderHandler() {
 }
 
 function getHome() {
+
+}
+
+function options()
+{
 
 }
 

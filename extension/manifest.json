@@ -10,7 +10,6 @@
 		"128" : "icon.png"
 	},
 	"permissions": [ "<all_urls>", "tabs", "notifications" ],
-	"options_page": "options.html",	
 	"browser_action" :
 	{
 		"default_icon" : "browseraction.png",
