@@ -24,7 +24,7 @@ function getStreams()
     $jqhxr = $.getJSON('https://api.twitch.tv/kraken/streams?game=Counter-Strike:+Global+Offensive');
 
     //HANDLE JSON REQUEST WHEN DONE
-    $jqhxr.done(function(data) {
+    $jqhxr.success(function(data) {
         //READ JSON DATA AND PUT IT INTO AN ARRAY TO WORK WITH
         var $json = $(data);
         var itemArray = [];
