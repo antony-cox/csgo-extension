@@ -11,8 +11,6 @@ $(document).ready(function() {
 	var defaultTab = localStorage["defaultTab"];
 	var homeLink = document.getElementById('homeLink');
 	homeLink.onclick = getHome;
-	//var newsLink = document.getElementById('newsLink');
-	//newsLink.onclick = getNews;
 	var eventsLink = document.getElementById('eventsLink');
 	eventsLink.onclick = getEvents;
 	if(!(defaultTab == "" || defaultTab == null)) {
@@ -119,35 +117,6 @@ function reminderHandler() {
 
 function getHome() {
 
-}
-
-function getNews() {
-	var tblNews = document.getElementById('tblNews');
-	tblNews.innerHTML = loading;
-	$jqhxr = $.get('http://www.hltv.org/news.rss.php');
-	$jqhxr.done(function(data) {
-		$xml = $(data);
-		var itemArray = [];
-		$xml.find("item").each(function() {
-			var $this = $(this),
-			item = {
-				title: $this.find("title").text(),
-				link: $this.find("link").text(),
-				pubDate: $this.find("pubDate").text(),
-			}
-		itemArray.push(item);
-		});
-		
-		itemArray = sortArrayByTime(itemArray);
-		var html = "<tbody>";
-		for(var i = 0;i<itemArray.length;i++) {
-			html += "<tr><td width='185px'><a href='"+itemArray[i].link+"' class='newsLink' target='_blank'>"+itemArray[i].title+"</a><td>";
-			html += "<td>"+getTimeDiff(itemArray[i].pubDate, "news")+"</td></tr>";
-		}
-		html += "</tbody>";
-		tblNews.innerHTML = html;
-		clickTR();
-	});
 }
 
 function getEvents() {
@@ -268,23 +237,3 @@ function getTimeDiff(strDate, type) {
 	return str;
 }
 
-function sortArrayByTime(itemArray) {
-	var swapped;
-	var time1;
-	var time2;
-	do {
-		swapped = false;
-		for (var i=0; i<itemArray.length-1;i++) {
-			time1 = new Date(itemArray[i].pubDate);
-			time2 = new Date(itemArray[i+1].pubDate);
-			if(time1 < time2) {
-				var temp = itemArray[i];
-				itemArray[i] = itemArray[i+1];
-				itemArray[i+1] = temp;
-				swapped = true;
-			}
-		}
-	} while (swapped);
-	
-	return itemArray;
-}
