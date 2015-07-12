@@ -9,7 +9,8 @@
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script> <!--  Including tabs -->
 		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script> <!--  Including accordion -->
 		<script type="text/javascript" src="js/script.js"></script><!--  Main script file -->
-		<script type="text/javascript" src="js/twitch.js"></script><!-- Script file for twitch streams -->
+		<script type="text/javascript" src="js/twitch.js"></script><!-- Script file for Twitch streams -->
+		<script type="text/javascript" src="js/reddit.js"></script><!-- Script file for Reddit posts-->
 	</head>
 
 	<body>
@@ -18,9 +19,9 @@
 				<ul class="idTabs">
 					<a href="#events" id="eventsLink" title="Events"><li class="iconEvents"></li></a>
 					<a href="#streams" id="streamsLink" title="Streams"><li class="iconStreams"></li></a>
+					<a href="#reddit" id="redditLink" title="Reddit"><li class="iconReddit"></li></a>
 					<a href="#home" id="homeLink" title="Home"><li class="iconHome"></li></a>
 					<!--<a href="#news" id="newsLink" title="News"><li class="iconNews"></li></a>
-					<a href="#reddit" id="redditLink" title="Reddit"><li class="iconReddit"></li></a>
 					<a href="#resources" id="resourcesLink" title="Resources"><li class="iconEvents"></li></a>-->
 				</ul><!-- end .idTabs -->
 				
@@ -63,14 +64,16 @@
 						</table>
 					</div><!-- end .contentArea -->
 				</div><!-- end #events -->
-				
-				<!--<div id="reddit">
-					<div class="header"><span>Reddit Posts</span></div>					
+
+				<div id="reddit">
+					<div class="header"><span>Reddit Posts</span></div>
 					<div class="contentArea">
 						<table id="tblReddit">
-						</table>&lt;!&ndash; end #tblReddit &ndash;&gt;
-					</div>&lt;!&ndash; end .contentArea &ndash;&gt;
-				</div>&lt;!&ndash; end #reddit &ndash;&gt;
+						</table><!-- end #tblReddit -->
+					</div><!-- end .contentArea -->
+				</div><!-- end #reddit -->
+				
+				<!--
 
 				<div id="news">
 					<div class="header"><span>News</span></div>					

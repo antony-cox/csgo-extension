@@ -13,10 +13,6 @@ $(document).ready(function() {
 	homeLink.onclick = getHome;
 	//var newsLink = document.getElementById('newsLink');
 	//newsLink.onclick = getNews;
-	//var redditLink = document.getElementById('redditLink');
-	//redditLink.onclick = getReddit(10);
-	//var streamsLink = document.getElementById('streamsLink');
-	//streamsLink.onclick = getStreams(10);
 	var eventsLink = document.getElementById('eventsLink');
 	eventsLink.onclick = getEvents;
 	if(!(defaultTab == "" || defaultTab == null)) {
@@ -150,53 +146,6 @@ function getNews() {
 		}
 		html += "</tbody>";
 		tblNews.innerHTML = html;
-		clickTR();
-	});
-}
-
-function getReddit(limit) {
-	var tblReddit = document.getElementById('tblReddit');
-	tblReddit.innerHTML = loading;
-	$jqhxr = $.getJSON('http://www.reddit.com/r/GlobalOffensive/hot.json');
-	$jqhxr.done(function(data) {
-		var $json = $(data);
-		var itemArray = [];
-		for (var i = 0;i<$json[0].data.children.length;i++) {
-			item = {
-				author: $json[0].data.children[i].data.author,
-				title: $json[0].data.children[i].data.title,
-				url: $json[0].data.children[i].data.url,
-				num_comments: $json[0].data.children[i].data.num_comments,
-				thumb: $json[0].data.children[i].data.thumbnail,
-				perma: "http://www.reddit.com" + $json[0].data.children[i].data.permalink,
-			}
-			itemArray.push(item)
-		}
-		
-		var html = "<tbody>";
-		var title = "";
-		var thumb = "";
-		for (var i = 0;i<limit;i++) {
-			if(itemArray[i].thumb == "self" || itemArray[i].thumb == "default") {
-				thumb = "../img/redditDefault.png";
-			} else {
-				thumb = itemArray[i].thumb;
-			}
-			
-			if(itemArray[i].title.length>60) {
-				title = itemArray[i].title.substring(0,56) + " ...";
-			} else {
-				title = itemArray[i].title
-			}
-			html += "<tr><td><a href="+itemArray[i].url+" target='_blank'><img src='"+thumb+"'/></a></td>";
-			html += "<td><p><a href="+itemArray[i].url+" class='redditLink' target='_blank'>"+title+"</a>";
-			html += "<span><a href="+itemArray[i].perma+" class='redditComments' target='_blank'>"+itemArray[i].num_comments+" comments</a> |" 
-			html += "<a href='http://www.reddit.com/u/"+itemArray[i].author+"' class='redditAuthor' target='_blank'>"+itemArray[i].author+"</a></span>";
-			html += "</p></td></tr>";
-		}
-		html += "<tr><td colspan='2'><a id='moreStreams' target='_blank' href='http://www.reddit.com/r/GlobalOffensive/'>View more</a></td></tr>";
-		html += "</tbody>";
-		tblReddit.innerHTML = html;
 		clickTR();
 	});
 }
